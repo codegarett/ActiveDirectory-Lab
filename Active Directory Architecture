@@ -1,1 +1,90 @@
+🧭This diagram illustrates a virtual Active Directory (AD) lab environment designed to simulate a realistic enterprise network for IT support, cybersecurity, or system administration training.
 
+🏢 Core Components
+Group Policy Object (GPO)
+
+Positioned at the top, this represents centralized configuration management in the Active Directory environment.
+
+GPOs are used to enforce security settings, user permissions, drive mappings, password policies, and more.
+
+GPOs are synchronized with the domain controller to propagate policy settings to client machines.
+
+Domain Controller (dc1.local.lab)
+
+The centerpiece of the AD infrastructure.
+
+Hosts Active Directory Domain Services (AD DS) and maintains the domain database (accounts, groups, computers, etc.).
+
+Authenticates users and computers using LDAP over TCP port 389.
+
+Receives GPO sync from the Group Policy Management infrastructure.
+
+Performs DNS Zone Lookups via UDP port 53 to locate network resources.
+
+DNS/DHCP Server (dns1.local.lab)
+
+Provides Domain Name System (DNS) services for internal name resolution.
+
+Handles Dynamic Host Configuration Protocol (DHCP) to automatically assign IP addresses to clients.
+
+Works closely with the domain controller to ensure domain members can resolve hostnames like dc1.local.lab.
+
+💻 Client Machines
+Client VM 1 (client01)
+
+Client VM 2 (client02)
+
+Client VM 3 (client03)
+
+All clients:
+
+Are domain-joined to local.lab.
+
+Authenticate to the domain controller using LDAP (TCP 389).
+
+Receive policies from the domain via GPO enforcement.
+
+Communicate internally with the DC, DNS server, and potentially other AD-integrated services.
+
+🔥 Firewall
+Sits between the internal lab network and the public internet.
+
+Controls and monitors traffic between client machines and the outside world.
+
+Ensures that unauthorized external access is blocked and only required services (e.g., HTTP/HTTPS) are allowed out.
+
+Can simulate enterprise-level security devices like pfSense or Windows Firewall.
+
+☁️ Internet Access
+The bottom of the diagram shows a connection to the Internet, symbolizing external services such as:
+
+GitHub (for pulling scripts or repositories)
+
+Microsoft 365 (for productivity apps or cloud-based directory sync)
+
+This access helps simulate realistic corporate workflows like software updates, cloud access, or remote authentication scenarios.
+
+🔄 Logical Flow
+Client boots → requests IP from DHCP
+
+Resolves dc1.local.lab via DNS
+
+Authenticates via LDAP to the Domain Controller
+
+Receives GPOs
+
+Accesses internal or external resources through the Firewall
+
+This lab setup models a minimal yet complete Active Directory infrastructure, making it ideal for practicing:
+
+Domain join procedures
+
+Group policy management
+
+User and group administration
+
+Network security simulation
+
+Windows PowerShell scripting
+
+Threat detection/response in an AD environment
